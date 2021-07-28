@@ -4,9 +4,9 @@ import { OriginalTemplateComponent } from './original-template/original-template
 
 const routes: Routes = [
   {
-    path: 'angular-template',
+    path: '',
     component: OriginalTemplateComponent,
-  }
+  },
 ];
 
 @NgModule({
