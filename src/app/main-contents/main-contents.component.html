@@ -1,1 +1,11 @@
-<p>HI</p>
+<div class="flexContainer">
+    <mat-toolbar class="flexContentSize">
+        <span>Angular Tutorial Template</span>
+        <button mat-button [routerLink]="['original-template']">Original template</button>
+        <button mat-button>Resources</button>
+        <button mat-button>Documentations</button>
+    </mat-toolbar>
+    <div class="flexRemainingSpace">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MainContentsComponent } from './main-contents.component';
 import { OriginalTemplateComponent } from './original-template/original-template.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: OriginalTemplateComponent,
+    component: MainContentsComponent,
+    children: [
+      {
+        path: 'original-template',
+        component: OriginalTemplateComponent,
+      },
+    ]
   },
 ];
 
