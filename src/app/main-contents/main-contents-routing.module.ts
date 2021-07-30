@@ -12,6 +12,13 @@ const routes: Routes = [
         path: 'original-template',
         component: OriginalTemplateComponent,
       },
+      {
+        path: 'documentation',
+        loadChildren: () =>
+            import('./documentation/documentation.module').then(
+                (m) => m.DocumentationModule
+            ),
+      },
     ]
   },
 ];

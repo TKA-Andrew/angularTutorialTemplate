@@ -1,11 +1,14 @@
 <div class="flexContainer">
-    <mat-toolbar class="flexContentSize">
+    <mat-toolbar class="flexContentSize" style="background: rgb(182, 182, 182);">
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
         <span>Angular Tutorial Template</span>
-        <button mat-button [routerLink]="['original-template']">Original template</button>
+        <button mat-button [routerLink]="['original-template']" matTooltip="Original Angular template">Original</button>
+        <button mat-button [routerLink]="['documentation']" matTooltip="Code Documentation">DOCS</button>
         <button mat-button>Resources</button>
-        <button mat-button>Documentations</button>
     </mat-toolbar>
-    <div class="flexRemainingSpace">
+    <div class="flexRemainingSpace" style="overflow: auto;">
         <router-outlet></router-outlet>
     </div>
 </div>
