@@ -1,6 +1,6 @@
 <div class="flexContainer">
     <mat-toolbar class="flexContentSize" style="background: rgb(182, 182, 182);">
-        <button mat-icon-button>
+        <button mat-icon-button *ngIf="shareFacadeService.menuIconStatusBS | async" (click)="toggleDrawer()">
             <mat-icon>menu</mat-icon>
         </button>
         <span>Angular Tutorial Template</span>

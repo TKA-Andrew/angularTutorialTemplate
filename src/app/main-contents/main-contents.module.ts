@@ -10,7 +10,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DocumentationModule } from './documentation/documentation.module';
-import { SidebarService } from './service/sidebar.service';
+import { ShareFacadeService } from './service/sharefacade.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BusyService } from './service/busy.service';
+import { HttpCancelService } from './service/httpCancel.service';
+import { DataProcessingService } from './service/dataProcessing.service';
+import { DrawerService } from './service/drawer.service';
 
 @NgModule({
   declarations: [OriginalTemplateComponent, MainContentsComponent],
@@ -22,10 +27,15 @@ import { SidebarService } from './service/sidebar.service';
     MainContentsRoutingModule,
     MatTooltipModule,
     MatIconModule,
+    MatSnackBarModule,
     DocumentationModule
   ],
   providers: [
-    SidebarService
+    DrawerService,
+    ShareFacadeService,
+    BusyService,
+    HttpCancelService,
+    DataProcessingService
   ]
 })
 export class MainContentsModule { }
