@@ -29,3 +29,13 @@ pre code {
   display: block;
   padding: 5px;
 }
+
+.lightThemeRouterLinkActive{
+  background-color: #d3d3d3;
+  color:#434fd3;
+}
+
+.darkThemeRouterLinkActive{
+  background-color: #535eda;
+  color:black;
+}

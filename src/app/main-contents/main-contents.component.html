@@ -3,9 +3,9 @@
         <button mat-icon-button *ngIf="shareFacadeService.menuIconStatusBS | async" (click)="toggleDrawer()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>Angular Tutorial Template</span>
-        <button mat-button [routerLink]="['original-template']" routerLinkActive="mat-accent" matTooltip="Original Angular template">Original</button>
-        <button mat-button [routerLink]="['documentation']" routerLinkActive="mat-accent" matTooltip="Code Documentation">DOCS</button>
+        <span style="margin-right: 10px;">Angular Tutorial Template</span>
+        <button mat-button [routerLink]="['original-template']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Original Angular template">Original</button>
+        <button mat-button [routerLink]="['documentation']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Code Documentation">DOCS</button>
         <button mat-button>Resources</button>
     </mat-toolbar>
     <div class="flexRemainingSpace" style="overflow: auto;">
