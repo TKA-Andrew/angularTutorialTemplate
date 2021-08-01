@@ -12,12 +12,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ScssComponent } from './scss/scss.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
 
 @NgModule({
   declarations: [
     DocumentationComponent,
     GlobalStyleComponent,
-    ScssComponent
+    ScssComponent,
+    DesignPatternsComponent
   ],
   imports: [
     CommonModule,

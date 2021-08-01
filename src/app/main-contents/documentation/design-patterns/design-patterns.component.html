@@ -1,0 +1,89 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>Design Patterns are blueprints that help to handle some software design problems.</p>
+        <a href="https://refactoring.guru/design-patterns">Refer to this link for a detailed catalog of design patterns.</a>
+    </mat-card>
+    <mat-card>
+        <h3>High-Level Abstraction Layers</h3>
+        <p>This is similar to the <a href="https://refactoring.guru/design-patterns/facade">Facade design pattern</a> where we have a wrapper to abstract out the internal processes.</p>
+        <p>For example, let's say we have a function called addItemList() that runs the following process sequentially:</p>
+        <p style="padding-left: 20px;">1. starts a spinner</p>
+        <p style="padding-left: 20px;">2. sends HTTP request to backend, receives</p>
+        <p style="padding-left: 20px;">3. stops spinner upon receiving of HTTP response</p>
+        <p>Then, we can use a FacadeService to abstract the processes.</p>
+        <pre>
+            <code>
+    // IN FACADE.SERVICE.TS: 
+
+    private _itemListConfigurationService: ItemListConfigurationService;
+    public get itemListConfigurationService(): ItemListConfigurationService&#123;
+        if (!this._itemListConfigurationService)&#123;
+            this._itemListConfigurationService = this.injector.get(ItemListConfigurationService);
+        }
+        return this._itemListConfigurationService;
+    }
+    
+    private itemListConfigurationHandler = &#123;
+        next: statusText => &#123;
+            this.getItemList$().subscribe(
+                () => &#123;
+                    this.energyShareFacadeService.stopSpinner();
+                    this.energyShareFacadeService.openSnackBar(statusText);
+                }
+            );
+        },
+        error: error => &#123;
+            this.energyShareFacadeService.stopSpinner();
+            this.energyShareFacadeService.promptError(error);
+        }
+    };
+
+    getItemList$(): Observable&lt;any> &#123;
+        return this.itemConfigurationService.getItemList$();
+    }
+
+    addItem(itemObject: IItemObject) &#123;
+        this.energyShareFacadeService.startSpinner();
+        this.itemConfigurationService.addItem(itemObject).subscribe(this.itemListConfigurationHandler);
+    }
+
+    deleteItem(itemUUID: string) &#123;
+        this.energyShareFacadeService.startSpinner();
+        this.itemListConfigurationService.deleteItem(itemUUID).subscribe(this.itemListConfigurationHandler);
+    }
+            </code>
+        </pre>
+        <pre>
+            <code>
+    // IN ITEMLISTCONFIGURATION.COMPONENT.TS
+
+    ngOnInit(): void &#123;
+        this.shareFacadeService.startInitSpinner();
+        this.facadeService.getItemList$().subscribe(
+            () => &#123;
+                this.shareFacadeService.stopInitSpinner();
+            }
+        );
+    }
+
+    addItem(itemName: string): void &#123;
+        const itemObj = &#123;
+            name: itemName
+            uuid: null
+        }
+        this.facadeService.addItem(itemObj);
+    }
+
+    deleteItem(itemUUID: string): void &#123;
+        this.facadeService.addItem(itemUUID);
+    }
+            </code>
+        </pre>
+        <p>Using facade pattern or an abstraction layer also helps us in practising <a href="https://refactoring.guru/design-patterns/singleton">Singleton pattern</a>.</p>
+        <p>For example, if the itemListConfigurationService is declared in providers of more than one modules, then it will have multiple instances.</p>
+        <p>If Subject Subscription is used, then only the subscription of the same instance will be notified about the changes.</p>
+        <a href="https://github.com/angular/angular/issues/11618">You may refer to this Github issue regarding this problem</a>
+        <p>For more detailed explanation about High-level Abstraction Layer practice, you may refer to <a href="https://dev-academy.com/angular-architecture-best-practices/#high-level-abstraction-layers">this link</a></p>
+    </mat-card>
+</div>
