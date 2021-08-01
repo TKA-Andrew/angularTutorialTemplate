@@ -1,1 +1,76 @@
-<p>global-style works!</p>
+<div style="height: 100%; padding: 10px" fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>Global styles can be defined in the styles.scss or styles.css in the src directory.</p>
+        <p>Then, all components in the src are able to use the styles declared.</p>
+    </mat-card>
+    <mat-card>
+        <h3>flexContainer, flexContentSize, flexRemainingSpace</h3>
+        <p>The "flexContainer" is used to wrap a division where "flexContentSize" and "flexRemainingSpace" will be used.</p>
+        <p>The "flexContentSize" will span the space according to the size of the content.</p>
+        <p>The "flexRemainingSpace" will fill up the remaining space in the flexContainer.</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+                <div class="flexContainer" style="background: black; height: 100px;">
+                    <div class="flexContentSize" style="height: 20px; background: rgb(53, 175, 134);"></div>
+                    <div class="flexRemainingSpace" style="background: rgb(97, 86, 250);"></div>
+                </div>
+    &lt;div class="flexContainer" style="background: black; height: 100px;">
+        &lt;div class="flexContentSize" style="height: 20px; background: rgb(53, 175, 134);">&lt;/div>
+        &lt;div class="flexRemainingSpace" style="background: rgb(97, 86, 250);">&lt;/div>
+    &lt;/div>
+            </code>
+        </pre>
+    </mat-card>
+    <mat-card>
+        <h3>app-spacer</h3>
+        <p>This is used to fill up the empty space between two end of elements.</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+                <mat-toolbar>
+                    <button mat-icon-button>
+                      <mat-icon>menu</mat-icon>
+                    </button>
+                    <span>My App</span>
+                    <span class="app-spacer"></span>
+                    <button mat-icon-button>
+                      <mat-icon>favorite</mat-icon>
+                    </button>
+                </mat-toolbar>
+    &lt;mat-toolbar>
+        &lt;button mat-icon-button>
+            &lt;mat-icon>menu&lt;/mat-icon>
+        &lt;/button>
+        &lt;span>My App&lt;/span>
+        &lt;span class="app-spacer">&lt;/span>
+        &lt;button mat-icon-button>
+            &lt;mat-icon>favorite&lt;/mat-icon>
+        &lt;/button>
+    &lt;/mat-toolbar>
+            </code>
+        </pre>
+    </mat-card>
+    <mat-card>
+        <h3>pre code</h3>
+        <p>This is the style used to display the html snippets.</p>
+        <p>Note that you need to change the following</p>
+        <p style="padding-left: 10px;">- Change '&' to '&amp'</p>
+        <p style="padding-left: 10px;">- Change '<' to '&lt'</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+    &lt;div class="flexContainer" style="background: black; height: 100px;">
+        &lt;div class="flexContentSize" style="height: 20px; background: rgb(53, 175, 134);">&lt;/div>
+        &lt;div class="flexRemainingSpace" style="background: rgb(97, 86, 250);">&lt;/div>
+    &lt;/div>
+
+    &amp;lt;div class="flexContainer" style="background: black; height: 100px;">
+        &amp;lt;div class="flexContentSize" style="height: 20px; background: rgb(53, 175, 134);">&amp;lt;/div>
+        &amp;lt;div class="flexRemainingSpace" style="background: rgb(97, 86, 250);">&amp;lt;/div>
+    &amp;lt;/div>
+            </code>
+        </pre>
+    </mat-card>
+</div>

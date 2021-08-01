@@ -1,8 +1,11 @@
 <mat-drawer-container class="flexContainer" [hasBackdrop]="false">
   <mat-drawer #drawer [mode]="'side'">
-      <button mat-button>Global Style</button>
+    <div fxLayout="column">
+      <button mat-button [routerLink]="'scss'">SCSS</button>
+      <button mat-button [routerLink]="'globalStyle'">Global Style</button>
+    </div>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="flexContainer">
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
