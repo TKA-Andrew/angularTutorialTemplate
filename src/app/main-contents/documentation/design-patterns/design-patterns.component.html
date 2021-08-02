@@ -86,4 +86,55 @@
         <a href="https://github.com/angular/angular/issues/11618">You may refer to this Github issue regarding this problem</a>
         <p>For more detailed explanation about High-level Abstraction Layer practice, you may refer to <a href="https://dev-academy.com/angular-architecture-best-practices/#high-level-abstraction-layers">this link</a></p>
     </mat-card>
+    <mat-card>
+        <h3>Smart and Dumb Components</h3>
+        <p>This architectural pattern divides components into smart components and dumb components.</p>
+        <p>Dumb Components are also known as Presentational Components, as they only responsible for UI presentation as well as passing user's event to smart components.</p>
+        <p>On the other hand, Smart Components are the components that pass data to and react to events from dumb components. The business logics and communication with services are handled by smart components.</p>
+        <p>Example</p>
+        <pre>
+            <code>
+    // IN HEADER.COMPONENT.HTML (Dumb Component HTML)
+    
+    &lt;div fxLayout="row">
+        &lt;div style="margin-top: 10px;" fxLayout="column" fxLayoutAlign="start start">
+            &lt;h1 style="margin-right: 12px;"> &#123; &#123;headerTitle}}&lt;/h1>
+            &lt;h3 style="margin-bottom:5px">&#123; &#123;subHeaderTitle}}&lt;/h3>
+        &lt;/div>
+        &lt;span class="app-spacer">&lt;/span>
+        &lt;ng-content select=[additional-buttons]>&lt;/ng-content>
+    &lt;/div>
+            </code>
+        </pre>
+        <pre>
+            <code>
+    // IN HEADER.COMPONENT.TS (Dumb Component)
+
+    @Component(&#123;
+        selector: 'my-header',
+        templateUrl: './header.component.html',
+        styleUrls: ['./header.component.scss']
+    })
+    
+    export class EnergyHeaderComponent &#123;
+        @Input() headerTitle: string;
+        @Input() subHeaderTitle: string;
+    }
+            </code>
+        </pre>
+        <pre>
+            <code>
+    // IN ITEM-LIST-CONFIGURATION.COMPONENT.HTML (Smart Component HTML)
+
+    &lt;div class="flexContainer" style="background-color: whitesmoke;">
+        &lt;my-header class="flexContentSize" [headerTitle]="'Configuration'" [subHeaderTitle]="'Item List Configuration'">
+        &lt;/my-header>
+        &lt;div class="flexRemainingSpace">
+            &lt;configuration-element-here>&lt;/configuration-element-here>
+        &lt;/div>
+    &lt;/div>
+            </code>
+        </pre>
+        <p>For more detailed explanation about Smart & Dumb Components, you may refer to <a href="https://dev-academy.com/angular-architecture-best-practices/#smart-and-dumb-components">this link</a></p>
+    </mat-card>
 </div>
