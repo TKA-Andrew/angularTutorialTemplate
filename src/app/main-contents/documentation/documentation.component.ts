@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ShareFacadeService } from '../service/sharefacade.service';
 
@@ -7,13 +7,11 @@ import { ShareFacadeService } from '../service/sharefacade.service';
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss']
 })
-export class DocumentationComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DocumentationComponent implements AfterViewInit, OnDestroy {
   @ViewChild('drawer') public drawer: MatDrawer;
   constructor(
     private shareFacadeService: ShareFacadeService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.shareFacadeService.showMenuIcon();
   }
 
