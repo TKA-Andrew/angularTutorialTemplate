@@ -5,8 +5,10 @@
         </button>
         <span style="margin-right: 10px;">Angular Tutorial Template</span>
         <button mat-button [routerLink]="['original-template']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Original Angular template">Original</button>
-        <button mat-button [routerLink]="['documentation']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Code Documentation">DOCS</button>
-        <button mat-button>Features</button> <!--Money saving prediction in 10 years, PDF to image converters-->
+        <button mat-button [routerLink]="['tutorial']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Angular Tutorial">Tutorial</button>
+        <button mat-button [routerLink]="['documentation']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Code Documentation">Documentation</button>
+        <button mat-button matTooltip="Some Practical Hands-On">Features</button> <!--Money saving prediction in 10 years, PDF to image converters-->
+        <button mat-button matTooltip="Useful Resources for Development">Resources</button>
     </mat-toolbar>
     <div class="flexRemainingSpace" style="overflow: auto;">
         <router-outlet></router-outlet>

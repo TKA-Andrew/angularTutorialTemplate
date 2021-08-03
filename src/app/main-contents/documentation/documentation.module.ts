@@ -9,20 +9,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { GlobalStyleComponent } from './global-style/global-style.component';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ScssComponent } from './scss/scss.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
-import { RoutingDocumentationComponent } from './routing-documentation/routing-documentation.component';
 import { DataPassingDocumentationComponent } from './data-passing-documentation/data-passing-documentation.component';
 
 @NgModule({
   declarations: [
     DocumentationComponent,
     GlobalStyleComponent,
-    ScssComponent,
     DesignPatternsComponent,
-    RoutingDocumentationComponent,
     DataPassingDocumentationComponent
   ],
   imports: [

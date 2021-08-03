@@ -13,6 +13,13 @@ const routes: Routes = [
         component: OriginalTemplateComponent,
       },
       {
+        path: 'tutorial',
+        loadChildren: () =>
+            import('./tutorial/tutorial.module').then(
+                (m) => m.TutorialModule
+            ),
+      },
+      {
         path: 'documentation',
         loadChildren: () =>
             import('./documentation/documentation.module').then(

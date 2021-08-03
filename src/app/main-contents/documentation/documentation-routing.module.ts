@@ -4,8 +4,6 @@ import { DataPassingDocumentationComponent } from './data-passing-documentation/
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
 import { DocumentationComponent } from './documentation.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
-import { RoutingDocumentationComponent } from './routing-documentation/routing-documentation.component';
-import { ScssComponent } from './scss/scss.component';
 
 const routes: Routes = [
   {
@@ -13,20 +11,12 @@ const routes: Routes = [
     component: DocumentationComponent,
     children: [
       {
-        path: 'scss',
-        component: ScssComponent
-      },
-      {
         path: 'globalStyle',
         component: GlobalStyleComponent
       },
       {
         path: 'designPattern',
         component: DesignPatternsComponent
-      },
-      {
-        path: 'routing',
-        component: RoutingDocumentationComponent
       },
       {
         path: 'dataPassing',

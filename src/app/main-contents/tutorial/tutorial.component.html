@@ -1,0 +1,16 @@
+<mat-drawer-container class="flexContainer" [hasBackdrop]="false">
+  <mat-drawer #drawer [mode]="'side'">
+    <div fxLayout="column">
+      <button mat-button [routerLink]="'scss'" routerLinkActive="lightThemeRouterLinkActive">SCSS</button>
+      <button mat-button >Basics</button>
+      <button mat-button [routerLink]="'routing'" routerLinkActive="lightThemeRouterLinkActive">Routing</button>
+      <button mat-button >RxJS Observable</button>
+      <button mat-button >RxJS Behaviour Subject</button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="flexContainer">
+    <div style="padding: 10px">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
