@@ -1,0 +1,48 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <!--TO DO: add a child route here-->
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>The powerful advantage of Angular is the single-page application feature.</p>
+        <p>If we use href (a basic attribute provided by HTML) to navigate through pages, it actually relaods the page on click.</p>
+        <p>Contrastingly, when we use routerLink (an attribute provided by Angular), we can navigate to other components without reloading the page</p>
+        <p>Hence, routerLink doesn't lose the state of the page</p>
+        <p>For example, data cached in Angular services is not lost when routing happens within the child components.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Hands-On Lab</h3>
+        <p>Observe the difference between href and routerLink</p>
+        <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+            <a href="/original-template">href to Original Template</a>
+            <button mat-raised-button [routerLink]="'./../../original-template'">routerLink to Original Template</button>
+        </div>
+    </mat-card>
+    <mat-card>
+        <h3>routerLink</h3>
+        <p>There are 2 types of paths: absolute path and relative path</p>
+        <p style="padding-left: 20px;">- Absolute path (has a '/' infront) directly refers to the path regardless of the current path.</p>
+        <p style="padding-left: 20px;">- Relative path appends the path to the end of current path.</p>
+        <pre>
+            <code>
+    // Absolute path
+    <button mat-raised-button routerLink='/original-template'>routerLink='/original-template'</button>
+
+    // Relative path
+    <button mat-raised-button routerLink='../../original-template'>routerLink='../../original-template'</button>
+            </code>
+        </pre>
+        <p>You can also use property binding on routerLink:</p>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <button mat-raised-button [routerLink]="'../../original-template'">&#91;routerLink]="'../../original-template''"</button>
+            <p>is equivalent to</p>
+            <button mat-raised-button routerLink='../../original-template'>routerLink='../../original-template'</button>
+        </div>
+        <p style="font-style: italic;">Side Note: The ../ is not necessarily remove one segment, it will remove the whole segment which is currently loaded.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Routing to Dynamic Paths</h3>
+        <p>You can route to different paths using </p>
+    </mat-card>
+    <mat-card>
+        <h3>Programmatically Route to Another Path</h3>
+    </mat-card>
+</div>

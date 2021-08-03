@@ -13,13 +13,17 @@ import { ScssComponent } from './scss/scss.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
+import { RoutingDocumentationComponent } from './routing-documentation/routing-documentation.component';
+import { DataPassingDocumentationComponent } from './data-passing-documentation/data-passing-documentation.component';
 
 @NgModule({
   declarations: [
     DocumentationComponent,
     GlobalStyleComponent,
     ScssComponent,
-    DesignPatternsComponent
+    DesignPatternsComponent,
+    RoutingDocumentationComponent,
+    DataPassingDocumentationComponent
   ],
   imports: [
     CommonModule,
