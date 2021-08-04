@@ -77,8 +77,43 @@
     &lt;/ng-container>
             </code>
         </pre>
+        <p>Then, you can further read the variable passed in the path.</p>
+        <pre>
+            <code>
+    // IN item-view.component.ts
+    constructor(
+        private activatedRoute: ActivatedRoute
+    ) &#123; }
+
+    ngOnInit(): void &#123;
+        this.activatedRoute.paramMap.subscribe(params => &#123;
+            const itemID = params.get('itemID');
+        })
+    }
+            </code>
+        </pre>
     </mat-card>
     <mat-card>
         <h3>Programmatically Route to Another Path</h3>
+        <p>You can use router.navigate() or router.navigateByURL() to programmatically route to another path</p>
+        <pre>
+            <code>
+    constructor(
+        private router:Router,
+        private route: ActivatedRoute
+    ) &#123; }
+
+    // using relative path
+    navigateToOriginalTemplate()&#123;
+        this.router.navigate(['../../orignal-template'], &#123;relativeTo: this.route})
+    }
+
+    // using absolute paths
+    navigateByURLToOriginalTemplate()&#123;
+        this.router.navigateByURL(`original-template`);
+    }
+
+            </code>
+        </pre>
     </mat-card>
 </div>
