@@ -40,7 +40,43 @@
     </mat-card>
     <mat-card>
         <h3>Routing to Dynamic Paths</h3>
-        <p>You can route to different paths using </p>
+        <p>You can route to dynamic paths by making use of the property binding.</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+    // IN item-list-routing.module.ts
+    const routes: Routes = [
+    &#123;
+        path: '',
+        component: ItemListComponent,
+        children: [
+        &#123;
+            path: 'viewItem/:itemID',
+            component: ViewItemComponent
+        },
+        &#123;
+            path: 'itemConfiguration',
+            component: ItemConfigurationComponent
+        },
+        ]
+    }
+    ];
+
+    @NgModule(&#123;
+        imports: [RouterModule.forChild(routes)],
+        exports: [RouterModule]
+    })
+            </code>
+        </pre>
+
+        <pre>
+            <code>
+    // IN item-list.component.html
+    &lt;ng-container *ngFor="let itemID of itemIDList">
+        &lt;button [routerLink]="['viewItem', itemID]">View Item&lt;/button>
+    &lt;/ng-container>
+            </code>
+        </pre>
     </mat-card>
     <mat-card>
         <h3>Programmatically Route to Another Path</h3>
