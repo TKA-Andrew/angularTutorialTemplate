@@ -17,6 +17,86 @@
         </div>
     </mat-card>
     <mat-card>
+        <h3>Using Routing Module To Handle Paths</h3>
+        <p>Using a app-routing.module.ts or submodule-routing-module.ts to handles paths is a more organized practice.</p>
+        <p>The following is an example of app-routing.module.ts:</p>
+        <pre>
+            <code>
+    // IN app-routing.module.ts
+
+    import &#123; NgModule } from '@angular/core';
+    import &#123; Routes, RouterModule } from '@angular/router';
+
+    const routes: Routes = [
+        &#123; path: '', loadChildren: () => import('./main-contents/main-contents.module').then(m => m.MainContentsModule) },
+        &#123; path: 'notfound', loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule) },
+        &#123; path: '**', redirectTo: 'notfound' }
+    ];
+
+    @NgModule(&#123;
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule]
+    })
+    export class AppRoutingModule &#123; }
+            </code>
+        </pre>
+        <p style="font-style: italic"><strong>Side Note</strong>: It is a good practice to have a not-found component to display the error when the Angular app is routed to an undefined route.</p>
+        <p>Then, in your app-module.ts, you need to import RouterModule and this AppRoutingModule.</p>
+        <pre>
+            <code>
+    // IN app.module.ts
+
+    @NgModule(&#123;
+        declarations: [
+            AppComponent
+        ],
+        imports: [
+            AppRoutingModule,
+            RouterModule,
+        ],
+        providers: [],
+        bootstrap: [AppComponent]
+    })
+    export class AppModule &#123; }
+            </code>
+        </pre>
+        <p>Using submodule-routing.module.ts for modules are quite similar to the app-routing.module.ts, except that you will be using RouterModule.forChild(routes). Very often also you going to have child routes for your module.</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+    // IN main-contents-routing.module.ts
+
+    const routes: Routes = [
+        &#123;
+            path: '',
+            component: MainContentsComponent, // main route component
+            children: [
+                &#123;
+                    path: 'original-template',
+                    component: OriginalTemplateComponent,
+                }, // route to Angular Component
+                &#123;
+                    path: 'tutorial',
+                    loadChildren: () =>
+                        import('./tutorial/tutorial.module').then(
+                            (m) => m.TutorialModule
+                        ),
+                }, // route to Angular Module
+            ]
+        }, // you can have more main routes after this line
+    ];
+
+    @NgModule(&#123;
+        imports: [RouterModule.forChild(routes)],
+        exports: [RouterModule]
+    })
+
+    export class MainContentsRoutingModule &#123; }
+            </code>
+        </pre>
+        <p>In your submodule.module.ts, you need to import RouterModule and the respective RoutingModule as well.</p>
+    </mat-card>
+    <mat-card>
         <h3>routerLink</h3>
         <p>There are 2 types of paths: absolute path and relative path</p>
         <p style="padding-left: 20px;">- Absolute path (has a '/' infront) directly refers to the path regardless of the current path.</p>
@@ -36,7 +116,7 @@
             <p>is equivalent to</p>
             <button mat-raised-button routerLink='../../original-template'>routerLink='../../original-template'</button>
         </div>
-        <p style="font-style: italic;">Side Note: The ../ is not necessarily remove one segment, it will remove the whole segment which is currently loaded.</p>
+        <p style="font-style: italic"><strong>Side Note</strong>: The ../ is not necessarily remove one segment, it will remove the whole segment which is currently loaded.</p>
     </mat-card>
     <mat-card>
         <h3>Routing to Dynamic Paths</h3>
@@ -99,7 +179,7 @@
     }
             </code>
         </pre>
-        <p style="font-style: italic;"><strong>Side Note</strong>: Using params.subscribe() is similar to using an observable, but for params.subscribe(), you don't need to manually do unsubscribe() because the Angular will do it automatically for you.</p>
+        <p style="font-style: italic"><strong>Side Note</strong>: Using params.subscribe() is similar to using an observable, but for params.subscribe(), you don't need to manually do unsubscribe() because the Angular will do it automatically for you.</p>
     </mat-card>
     <mat-card>
         <h3>Programmatically Route to Another Path</h3>
