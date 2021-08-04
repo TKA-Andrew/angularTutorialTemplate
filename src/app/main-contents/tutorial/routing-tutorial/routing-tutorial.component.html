@@ -77,7 +77,11 @@
     &lt;/ng-container>
             </code>
         </pre>
-        <p>Then, you can further read the variable passed in the path.</p>
+
+    </mat-card>
+    <mat-card>
+        <h3>Reading Parameters In The Path</h3>
+        <p>Then, you can further read the variable passed in the path or even the variable passed in parent path.</p>
         <pre>
             <code>
     // IN item-view.component.ts
@@ -89,9 +93,13 @@
         this.activatedRoute.paramMap.subscribe(params => &#123;
             const itemID = params.get('itemID');
         })
+        this.activatedRoute.parent.paramMap.subscribe(params => &#123;
+            const itemGroupID = params.get('itemGroupID');
+        })
     }
             </code>
         </pre>
+        <p style="font-style: italic;"><strong>Side Note</strong>: Using params.subscribe() is similar to using an observable, but for params.subscribe(), you don't need to manually do unsubscribe() because the Angular will do it automatically for you.</p>
     </mat-card>
     <mat-card>
         <h3>Programmatically Route to Another Path</h3>
