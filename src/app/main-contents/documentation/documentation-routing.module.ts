@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DataPassingDocumentationComponent } from './data-passing-documentation/data-passing-documentation.component';
+import { DataProcessingComponent } from './data-processing/data-processing.component';
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
 import { DocumentationComponent } from './documentation.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
@@ -19,8 +19,8 @@ const routes: Routes = [
         component: DesignPatternsComponent
       },
       {
-        path: 'dataPassing',
-        component: DataPassingDocumentationComponent
+        path: 'dataProcessing',
+        component: DataProcessingComponent
       },
     ]
   }

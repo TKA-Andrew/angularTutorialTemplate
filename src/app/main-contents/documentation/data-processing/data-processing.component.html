@@ -1,0 +1,78 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>It is very common that we need to manipulate the data for easier access when we need them.</p>
+        <p>Other than basic variable types such as string, number and boolean, array, object and collection are commonly used.</p>
+        <p>It is very often that the data obtained from database query is returned in the form of collection.</p>
+        <p>In the form of collection, it is troublesome for us to find a specifc data, hence it is better to be converted to Record.</p>
+    </mat-card>
+
+    <mat-card>
+        <h3>convertCollectionToObject()</h3>
+        <p>Make sure that this is used on collection that has unique id, else some of the data will be lost.</p>
+        <p>Use case example:</p>
+        <pre>
+            <code>
+    const dataFromDatabase = [
+        &#123;
+            item_id: 'abc001',
+            item_category: 'pen',
+            item_name: 'Brand A',
+            item_price: 2
+        },
+        &#123;
+            item_id: 'abc002',
+            item_category: 'pen',
+            item_name: 'Brand B',
+            item_price: 3
+        },
+        &#123;
+            item_id: 'abc003',
+            item_category: 'ruler',
+            item_name: 'Brand X',
+            item_price: 2
+        }
+    ];
+
+    this.dataRecord = this.shareFacadeService.convertCollectionToObject(dataFromDatabase, 'item_id')
+
+    // dataRecord output
+    &#123;
+        abc001: &#123;
+            item_category: "pen",
+            item_id: "abc001",
+            item_name: "Brand A",
+            item_price: 2
+        },
+        abc002: &#123;
+            item_category: "pen",
+            item_id: "abc002",
+            item_name: "Brand B",
+            item_price: 3
+        }, 
+        abc003: &#123;
+            item_category: "ruler",
+            item_id: "abc003",
+            item_name: "Brand X",
+            item_price: 2
+        }
+    }
+            </code>
+        </pre>
+        <p>Then, we can easily access and modify any property of the items as long as we know the item_id</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+    // IN item-configuration.component.ts
+
+    modifyPrice(itemID: string, newPrice: number) &#123;
+        this.dataRecord[itemID].item_price = newPrice
+    }
+
+    renameItem(itemID: string, newName: string) &#123;
+        this.dataRecord[itemID].item_name = newName
+    }
+            </code>
+        </pre>
+    </mat-card>
+</div>

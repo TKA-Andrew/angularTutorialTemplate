@@ -12,14 +12,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
-import { DataPassingDocumentationComponent } from './data-passing-documentation/data-passing-documentation.component';
+import { DataProcessingComponent } from './data-processing/data-processing.component';
 
 @NgModule({
   declarations: [
     DocumentationComponent,
     GlobalStyleComponent,
     DesignPatternsComponent,
-    DataPassingDocumentationComponent
+    DataProcessingComponent,
   ],
   imports: [
     CommonModule,

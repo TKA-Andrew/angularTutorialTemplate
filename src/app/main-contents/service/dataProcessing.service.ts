@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import cloneDeep from 'lodash-es/cloneDeep';
 import sortBy from 'lodash-es/sortBy';
 
 export interface KeyOrderConfig {
@@ -10,7 +9,7 @@ export interface KeyOrderConfig {
 @Injectable()
 export class DataProcessingService {
 
-    convertArrayToObject(array, key): Record<string, unknown> {
+    convertCollectionToObject(array, key): Record<string, unknown> {
         const initialValue = {};
         return array.reduce((obj, item) => {
             return {
