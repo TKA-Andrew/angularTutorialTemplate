@@ -3,7 +3,7 @@ This is an Angular project that documents Angular techniques and knowledges thro
 
 ## Reference of versions
 1. Node.js : v12.18.3
-2. Angular CLI : 10.0.8
+2. Angular CLI : 11.2.14
 3. OS : win32 x64
 
 ## Useful References
