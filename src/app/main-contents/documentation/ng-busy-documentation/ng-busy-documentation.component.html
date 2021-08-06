@@ -1,0 +1,98 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>Spinner is very commonly needed for dynamic website where some buffer time is needed to query data.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Experiment Lab</h3>
+        <div style="position: relative;">
+            <div fxLayout="column" fxLayoutAlign="center center" style="height: 200px; background: whitesmoke;" [ngBusy]="{busy: busy, backdrop: true}">
+                A div with 200px height
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px">
+            <button mat-raised-button (click)="startSpinner()">Start Spinner</button>
+            <button mat-raised-button (click)="stopSpinner()">Stop Spinner</button>
+        </div>
+    </mat-card>
+    <mat-card>
+        <h3>NgBusy Setup</h3>
+        <p>Run "npm i ng-busy" to install the npm package.</p>
+        <p>Import this module in your app.module, and use the forRoot() function to standardize the configuration of the ngBusy.</p>
+        <pre>
+            <code>
+    // IN app.module.ts
+
+    import &#123; BusyConfig, NgBusyModule } from 'ng-busy';
+    @NgModule(&#123;
+        imports: [
+            NgBusyModule.forRoot(new BusyConfig(&#123;
+                template: AppBusyComponent,
+                wrapperClass: 'app-busy',
+                disableAnimation: true,
+            }))
+        ],
+    })
+            </code>
+        </pre>
+        <p style="font-style: italic"><strong>Side Note</strong>: For full list of configuration options, please refer to <a href="https://www.npmjs.com/package/ng-busy" target="_blank" rel="noopener noreferrer">this</a></p>
+        <p>Then, you need to create AppBusyComponent that defines the styling of the spinner</p>
+        <pre>
+            <code>
+    // IN app-busy.component.ts
+
+    import &#123; Component } from '@angular/core';
+    @Component(&#123;
+        selector: 'app-busy',
+        template: `
+            &lt;style>
+                .spinner &#123;
+                    border: 8px solid #f3f3f3;
+                    border-radius: 50%;
+                    position: relative;
+                    border-top: 8px solid #3498db;
+                    width: 30px;
+                    height: 30px;
+                    -webkit-animation: spin 2s linear infinite; /* Safari */
+                    animation: spin 2s linear infinite;
+                }
+
+                /* Safari */
+                @-webkit-keyframes spin &#123;
+                    0% &#123; -webkit-transform: rotate(0deg); }
+                    100% &#123; -webkit-transform: rotate(360deg); }
+                }
+
+                @keyframes spin &#123;
+                    0% &#123; transform: rotate(0deg); }
+                    100% &#123; transform: rotate(360deg); }
+                }
+            &lt;/style>
+            &lt;div style="width: 100%; height: 100%; display: flex;align-items: center; justify-content: center;">
+                &lt;svg class="spinner">&lt;/svg>
+            &lt;/div>
+        `,
+    })
+    export class AppBusyComponent &#123;}
+            </code>
+        </pre>
+        <p style="font-style: italic"><strong>Side Note</strong>: The spinner style is modified from <a href="https://www.w3schools.com/howto/howto_css_loader.asp" target="_blank" rel="noopener noreferrer">this example</a>.</p>
+        <p>Then, you also need to define your 'app-busy' style. For this, I defined it in my global style.</p>
+        <pre>
+            <code>
+    // IN style.scss
+
+    .app-busy &#123;
+        position: absolute;
+        background: #fff;
+        opacity: 0.8;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+            </code>
+        </pre>
+    </mat-card>
+</div>

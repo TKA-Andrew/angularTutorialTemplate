@@ -4,6 +4,7 @@ import { DataProcessingComponent } from './data-processing/data-processing.compo
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
 import { DocumentationComponent } from './documentation.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
+import { NgBusyDocumentationComponent } from './ng-busy-documentation/ng-busy-documentation.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
         path: 'dataProcessing',
         component: DataProcessingComponent
       },
+      {
+        path: 'ngBusy',
+        component: NgBusyDocumentationComponent
+      }
     ]
   }
 ];

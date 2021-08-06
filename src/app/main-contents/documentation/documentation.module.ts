@@ -13,6 +13,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DesignPatternsComponent } from './design-patterns/design-patterns.component';
 import { DataProcessingComponent } from './data-processing/data-processing.component';
+import { NgBusyDocumentationComponent } from './ng-busy-documentation/ng-busy-documentation.component';
+import { NgBusyModule } from 'ng-busy';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import { DataProcessingComponent } from './data-processing/data-processing.compo
     GlobalStyleComponent,
     DesignPatternsComponent,
     DataProcessingComponent,
+    NgBusyDocumentationComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,9 @@ import { DataProcessingComponent } from './data-processing/data-processing.compo
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    RouterModule
+    MatProgressSpinnerModule,
+    RouterModule,
+    NgBusyModule,
   ]
 })
 export class DocumentationModule { }
