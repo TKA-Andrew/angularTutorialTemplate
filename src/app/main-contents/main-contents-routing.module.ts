@@ -26,6 +26,13 @@ const routes: Routes = [
                 (m) => m.DocumentationModule
             ),
       },
+      {
+        path: 'resources',
+        loadChildren: () =>
+            import('./resources/resources.module').then(
+                (m) => m.ResourcesModule
+            ),
+      },
     ]
   },
 ];

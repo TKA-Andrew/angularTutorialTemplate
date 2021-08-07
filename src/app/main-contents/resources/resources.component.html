@@ -1,0 +1,15 @@
+<mat-drawer-container class="flexContainer" [hasBackdrop]="false">
+    <mat-drawer #drawer [mode]="'side'" opened="true">
+      <div fxLayout="column">
+        <button mat-button [routerLink]="'lodash-es'">Lodash-es</button>
+        <button mat-button [routerLink]="'flexLayout'">Angular Flex-layout</button>
+        <button mat-button [routerLink]="'angularMaterial'">Angular Material</button>
+        <button mat-button [routerLink]="'ngBusy'">Ng Busy</button>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content class="flexContainer">
+      <div style="padding: 10px">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
