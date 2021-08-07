@@ -245,6 +245,24 @@
   
         <span>New Component</span>
       </div>
+
+      <div
+        class="card card-small"
+        (click)="selection.value = 'module&component'"
+        tabindex="0"
+      >
+        <svg
+          class="material-icons"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        </svg>
+
+        <span>New Module with Routing & Component</span>
+      </div>
   
       <div
         class="card card-small"
@@ -327,6 +345,7 @@
     <div class="terminal" [ngSwitch]="selection.value">
       <pre *ngSwitchDefault>ng generate module abc</pre>
       <pre *ngSwitchCase="'component'">ng generate component xyz</pre>
+      <pre *ngSwitchCase="'module&component'">ng generate module abc --routing=true && ng generate component abc</pre>
       <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
       <pre *ngSwitchCase="'pwa'">ng add @angular/pwa</pre>
       <pre *ngSwitchCase="'dependency'">ng add _____</pre>
