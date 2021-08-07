@@ -27,7 +27,7 @@
     private itemListConfigurationHandler = &#123;
         next: statusText => &#123;
             this.getItemList$().subscribe(
-                () => &#123;
+                (statusText) => &#123;
                     this.energyShareFacadeService.stopSpinner();
                     this.energyShareFacadeService.openSnackBar(statusText);
                 }

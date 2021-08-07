@@ -6,7 +6,7 @@
     <mat-card>
         <h3>Experiment Lab</h3>
         <div style="position: relative;">
-            <div fxLayout="column" fxLayoutAlign="center center" style="height: 200px; background: whitesmoke;" [ngBusy]="{busy: busy, backdrop: true}">
+            <div fxLayout="column" fxLayoutAlign="center center" style="height: 200px; background: whitesmoke;" [ngBusy]="{busy: [busy], backdrop: true}">
                 A div with 200px height
             </div>
         </div>
@@ -91,6 +91,200 @@
         left: 0;
         right: 0;
         z-index: 999;
+    }
+            </code>
+        </pre>
+    </mat-card>
+    <mat-card>
+        <h3>Use Case Example</h3>
+        <p>Code example for the Experiment Lab above: </p>
+        <pre>
+            <code>
+    // IN ng-busy-documentation.component.html
+
+    &lt;div style="position: relative;">
+        &lt;div fxLayout="column" fxLayoutAlign="center center" style="height: 200px; background: whitesmoke;" [ngBusy]="&#123;busy: [busy], backdrop: true}">
+            A div with 200px height
+        &lt;/div>
+    &lt;/div>
+    &lt;div fxLayout="row" fxLayoutGap="10px">
+        &lt;button mat-raised-button (click)="startSpinner()">Start Spinner&lt;/button>
+        &lt;button mat-raised-button (click)="stopSpinner()">Stop Spinner&lt;/button>
+    &lt;/div>
+            </code>
+        </pre>
+        <p style="font-style: italic"><strong>Side Note</strong>: Take note that you need to add [ngBusy] property binding to the div that you want to have busy spinner, and then you need to add a parent div with style="position: relative;"</p>
+        <pre>
+            <code>
+    // IN ng-busy-documentation.component.ts
+    
+    public busy: Promise&lt;boolean>;
+    private globalResolve;
+    
+    constructor(
+        private shareFacadeService: ShareFacadeService
+    ) &#123; }
+    
+    ngOnInit(): void &#123;
+        this.shareFacadeService.spinnerBS.subscribe(
+            (spin: boolean) => &#123;
+                if (spin === true)&#123;
+                    this.getBusy();
+                } else &#123;
+                    this.globalResolve();
+                }
+            }
+        );
+    }
+    
+    getBusy(): void &#123;
+        this.busy = new Promise((resolve, reject) => &#123;
+            this.globalResolve = resolve;
+        });
+    }
+    
+    startSpinner(): void &#123;
+        this.shareFacadeService.startSpinner();
+    }
+    
+    stopSpinner(): void &#123;
+        this.shareFacadeService.stopSpinner();
+    }
+            </code>
+        </pre>
+        <p>For a simpler and direct use case, you can directly reference your busy to a promise or subscription of observable.
+            Refer to <a href="https://www.npmjs.com/package/ng-busy" target="_blank" rel="noopener noreferrer">this link</a> for a full example.
+        </p>
+        <pre>
+            <code>
+    // IN yourcomponent.component.html
+
+    &lt;div [ngBusy]="busy">
+        // other html content here
+    &lt;/div>
+        
+
+
+    // IN yourcomponent.component.ts (referencing ngBusy control to a promise)
+
+    ngOnInit() &#123;
+        this.busy = this.http.get('...').toPromise();
+    }
+
+
+
+    // IN yourcomponent.component.ts (referencing ngBusy control to a subscription of Observable)
+
+    ngOnInit() &#123;
+        this.busy = this.http.get('...').subscribe();
+    }
+            </code>
+        </pre>
+        <p>The examples above are for adding spinner on a specific div only, you can further extend this use case to a global spinner, where [ngBusy] is used in app.component.html 
+            to do an entire backdrop and your child components can control that global spinner using the shareFacadeService.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Busy & InitBusy</h3>
+        <p>If you look at the shareFacade service, you will notice there are 2 busy spinner controls: spinner and initSpinner.</p>
+        <p>To understand why we need 2 types of spinner control, let's look at the example below. In this example, let's say we are
+            subscribing to 2 behaviour subjects to get 2 items, and then we need to wait for them before we render the html:
+        </p>
+        <pre>
+            <code>
+    // IN item-configuration.component.ts
+
+    ngOnInit(): void &#123;
+        this.itemListSub = this.facadeService.itemListBehaviourSubject.subscribe(
+            (itemList) => &#123;
+                this.itemList = itemList ? itemList : null;
+            }
+        );
+        this.promotionListSub = this.facadeService.promotionListBehaviourSubject.subscribe(
+            (promotionList) => &#123;
+                this.promotionList = promotionList ? promotionList : null;
+            }
+        );
+    }
+
+    addItem(itemObject) &#123;
+        this.facadeService.addItem(itemObject);
+    }
+
+
+
+    // IN item-configuration.component.html
+
+    &lt;div *ngIf="itemList && promotionList">
+        // html content here
+    &lt;/div>
+            </code>
+        </pre>
+        <p>If we want a spinner on this component when we load to this page 
+            and the spinner resolves when all data retrived, we can simply do this:</p>
+        <pre>
+            <code>
+    // IN item-configuration.component.html
+
+    &lt;div *ngIf="itemList && promotionList" [ngBusy]="&#123;busy: [itemListSub, promotionListSub], backdrop: true}">
+        // html content here
+    &lt;/div>
+            </code>
+        </pre>
+        <p>However, things get complicated if we want to have a global spinner and we want to have spinner for every
+            process such as adding item, deleting item, etc. This is why we have 'initBusy' for initial spinner when data getting loaded
+            and we have 'busy' for every process. And we can have additional function to stop the initial busy only when
+            all data are loaded.
+        </p>
+        <p>Example of controlling the initSpinner:</p>
+        <pre>
+            <code>
+    // IN item-configuration.component.ts
+
+    private dataInitCounter = 0;
+    ngOnInit(): void &#123;
+        this.shareFacadeService.startInitSpinner();
+        this.itemListSub = this.facadeService.itemListBehaviourSubject.subscribe(
+            (itemList) => &#123;
+                this.itemList = itemList ? itemList : null;
+                this.ngBusyResolveWithTarget(2);
+            }
+        );
+        this.promotionListSub = this.facadeService.promotionListBehaviourSubject.subscribe(
+            (promotionList) => &#123;
+                this.promotionList = promotionList ? promotionList : null;
+                this.ngBusyResolveWithTarget(2);
+            }
+        );
+    }
+
+    private ngBusyResolveWithTarget(dataInitTarget: number): void() &#123;
+        if (this.dataInitCounter<(dataInitTarget-1))&#123;
+            this.dataInitCounter += 1;
+            return;
+        }
+        this.shareFacadeService.stopInitSpinner();
+    }
+            </code>
+        </pre>
+        <p>Then, we can control the spinner in the facadeService.</p>
+        <pre>
+            <code>
+    // IN facade.service.ts
+
+    addItem(itemObject: IItemObject): void &#123;
+        this.energyShareFacadeService.startSpinner();
+        this.itemConfigurationService.addItem(itemObject).subscribe(&#123;
+            next: statusText => &#123;
+                this.getItemList$().subscribe(
+                    () => &#123;
+                        this.energyShareFacadeService.stopSpinner();
+                    }
+                );
+            },
+            error: error => &#123;
+                this.energyShareFacadeService.stopSpinner();
+            }
+        });
     }
             </code>
         </pre>
