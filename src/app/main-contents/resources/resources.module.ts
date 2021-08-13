@@ -11,7 +11,7 @@ import { NgBusyResourcesComponent } from './ng-busy-resources/ng-busy-resources.
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutResourcesComponent } from './flex-layout-resources/flex-layout-resources.component';
 import { AngularMaterialResourcesComponent } from './angular-material-resources/angular-material-resources.component';
-
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { AngularMaterialResourcesComponent } from './angular-material-resources/
     FlexLayoutModule,
     MatSidenavModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ]
 })
 export class ResourcesModule { }
