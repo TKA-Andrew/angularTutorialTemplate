@@ -1,0 +1,106 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>It is very often that you want to cancel all pending http calls on every route change,
+            as most of the time we users assume the functions are stopped when we leave the route.</p>
+        <p>Hence, we need to make use of <a href="https://angular.io/api/common/http/HttpInterceptor" target="_blank" rel="noopener noreferrer">Angular HttpInterceptor</a> to intercept and handle an HttpRequest or HttpResponse.</p>
+    </mat-card>
+    <mat-card>
+        <h2>Setup</h2>
+        <p>Note that you may either do this in app level or module level. In this example, we added it in main-contents module.</p>
+        <p>You need to create 2 extra files: httpCancel.service.ts and manageHttp.interceptor.ts</p>
+        <pre>
+            <code>
+    // httpCancel.service.ts
+
+    import &#123; Injectable } from '@angular/core';
+    import &#123; Observable, Subject } from 'rxjs';
+
+    @Injectable()
+    export class HttpCancelService &#123;
+
+        private pendingHTTPRequests$ = new Subject&lt;void>();
+
+        public cancelPendingRequests(): void &#123;
+            this.pendingHTTPRequests$.next();
+        }
+
+        public onCancelPendingRequests(): Observable&lt;void> &#123;
+            this.pendingHTTPRequests$.subscribe();
+            return this.pendingHTTPRequests$.asObservable();
+        }
+
+    }
+            </code>
+        </pre>
+        <pre>
+            <code>
+    // main-contetns-manageHttp.interceptor.ts
+
+    import &#123;
+        HttpEvent,
+        HttpHandler,
+        HttpInterceptor,
+        HttpRequest} from '@angular/common/http';
+    import &#123; Injectable } from '@angular/core';
+    import &#123; Observable } from 'rxjs';
+    import &#123; takeUntil } from 'rxjs/operators';
+    import &#123; HttpCancelService } from './service/httpCancel.service';
+    
+    @Injectable()
+    export class MaintContentsManageHttpInterceptor implements HttpInterceptor &#123;
+    
+        constructor(
+            private httpCancelService: HttpCancelService) &#123;
+        }
+    
+        intercept&lt;T>(req: HttpRequest&lt;T>, next: HttpHandler): Observable&lt;HttpEvent&lt;T>> &#123;
+            return next.handle(req).pipe(takeUntil(this.httpCancelService.onCancelPendingRequests()));
+        }
+    }
+    
+            </code>
+        </pre>
+        <p>Then, you need to import and provide your httpCancelService and manageHtttpInterceptor to your module.ts</p>
+        <pre>
+            <code>
+    // IN main-contents.module.ts
+
+    import &#123; MainContentsRoutingModule } from './main-contents-routing.module';
+    import &#123; MainContentsComponent } from './main-contents.component';
+    import &#123; HttpCancelService } from './service/httpCancel.service';
+    import &#123; HTTP_INTERCEPTORS } from '@angular/common/http';
+    import &#123; MainContentsManageHttpInterceptor } from './main-contents-manageHttp.interceptor';
+
+    @NgModule(&#123;
+    declarations: [MainContentsComponent],
+    imports: [
+        MainContentsRoutingModule,
+    ],
+    providers: [
+        HttpCancelService,
+        &#123; provide: HTTP_INTERCEPTORS, useClass: MainContentsManageHttpInterceptor, multi: true }
+    ]
+    })
+    export class MainContentsModule &#123; }
+            </code>
+        </pre>
+    </mat-card>
+    <mat-card>
+        <h2>Use Case: Cancel all pending Http calls when the component is destroyed</h2>
+        <p>To make use of cancel pending request function, you can call the function in ngOnDestroy().</p>
+        <pre>
+            <code>
+    // IN any-component.component.ts
+
+    ngOnDestroy(): void &#123;
+        this.httpCancelService.cancelPendingRequests();
+    }
+            </code>
+        </pre>
+        <p>The example above requires you to call the function in ngOnDestroy() of every relevant component.</p>
+        <p>To literally subscribe to route change and cancel all pending requests automatically (without manually calling the cancel request function), 
+            you may refer to <a href="https://www.freakyjolly.com/angular-how-to-cancel-http-calls-on-router-change/" target="_blank" rel="noopener noreferrer">this tutorial.</a>
+        </p>
+    </mat-card>
+</div>

@@ -16,6 +16,7 @@ import { DataProcessingComponent } from './data-processing/data-processing.compo
 import { NgBusyDocumentationComponent } from './ng-busy-documentation/ng-busy-documentation.component';
 import { NgBusyModule } from 'ng-busy';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HttpCancelComponent } from './http-cancel/http-cancel.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     DesignPatternsComponent,
     DataProcessingComponent,
     NgBusyDocumentationComponent,
+    HttpCancelComponent,
   ],
   imports: [
     CommonModule,

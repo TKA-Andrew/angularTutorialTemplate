@@ -6,7 +6,6 @@ export class HttpCancelService {
 
     private pendingHTTPRequests$ = new Subject<void>();
 
-    // Cancel Pending HTTP calls
     public cancelPendingRequests(): void {
         this.pendingHTTPRequests$.next();
     }

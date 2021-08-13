@@ -16,6 +16,8 @@ import { BusyService } from './service/busy.service';
 import { HttpCancelService } from './service/httpCancel.service';
 import { DataProcessingService } from './service/dataProcessing.service';
 import { DrawerService } from './service/drawer.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MainContentsManageHttpInterceptor } from './main-contents-manageHttp.interceptor';
 
 @NgModule({
   declarations: [OriginalTemplateComponent, MainContentsComponent],
@@ -34,8 +36,9 @@ import { DrawerService } from './service/drawer.service';
     DrawerService,
     ShareFacadeService,
     BusyService,
+    DataProcessingService,
     HttpCancelService,
-    DataProcessingService
+    { provide: HTTP_INTERCEPTORS, useClass: MainContentsManageHttpInterceptor, multi: true }
   ]
 })
 export class MainContentsModule { }
