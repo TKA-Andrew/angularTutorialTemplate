@@ -1,0 +1,193 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>To handle http requests and supports, we will use Angular Http Client Module.</p>
+        <p>Http Client Module is built into @angular/common module, hence you do not need to install extra package.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Setup</h3>
+        <h4>Step 1: Import HttpClientModule in module.ts</h4>
+        <pre>
+            <code>
+    // IN tutorial.module.ts
+
+    import &#123; HttpClientModule } from '@angular/common/http';
+
+    @NgModule(&#123;
+        imports: [
+            HttpClientModule,
+        ]
+    })
+
+    export class TutorialModule &#123; }
+            </code>
+        </pre>
+        <h4>Step 2: Import HtppClient in component.ts</h4>
+        <p>For simple demo purpose, we will send http request to <a href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noopener noreferrer">JSONPlaceholder</a>.</p>
+        <p>Output display:</p>
+            <div style="height: 100px; overflow: auto; border: solid; padding: 5px">
+                <div *ngFor="let post of posts | async">
+                    {{ post | json}}
+                </div>
+            </div>
+            <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      IN tutorial-httpclient.component.html
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <pre>
+                      <code>
+        &lt;div style="height: 100px; overflow: auto; border: solid; padding: 5px">
+            &lt;div &#42;ngFor="let post of posts | async">
+                &#123; &#123; post | json }}
+            &lt;/div>
+        &lt;/div>
+                      </code>
+                  </pre>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      IN tutorial-httpclient.component.ts
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <pre>
+                    <code>
+    import &#123; HttpClient } from '@angular/common/http';
+    import &#123; Component, OnInit } from '@angular/core';
+
+    export class TutorialHttpclientComponent implements OnInit&#123;
+        readonly ROOT_URL = 'https://jsonplaceholder.typicode.com';
+        posts: any;
+    
+        constructor(private http: HttpClient) &#123; }
+    
+        ngOnInit(): void &#123;
+            this.posts = this.http.get(this.ROOT_URL + '/posts');
+        }
+    }
+                    </code>
+                </pre>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <p style="font-style: italic"><strong>Side Note</strong>: The <a href="https://angular.io/api/common/AsyncPipe" target="_blank" rel="noopener noreferrer">async pipe</a> 
+        used in HTML subscribes to the observable and returns its latest value.</p>
+        <p style="font-style: italic"><strong>Side Note</strong>: The <a href="https://angular.io/api/common/JsonPipe" target="_blank" rel="noopener noreferrer">JSON pipe</a>
+        used in HTML is to convert an object to JSON format for display purpose</p>
+    </mat-card>
+    <mat-card>
+        <h3></h3>
+    </mat-card>
+    <mat-card>
+        <h3>Http Client with RxJs</h3>
+        <p>The following example is modified from <a href="https://www.youtube.com/watch?v=_05v0mrNLh0" target="_blank" rel="noopener noreferrer">this video</a>.
+        You are encouraged to watch the video first for better understanding.</p>
+        <p>Take note that there might be some differences in RxJs usage due to version difference.</p>
+        <div style="height: 100px; overflow: auto; border: solid; padding: 5px">
+            <div *ngFor="let post of postsOfUserId1 | async">
+                {{ post | json}}
+            </div>
+        </div>
+        <div style="height: 100px; overflow: auto; border: solid; padding: 5px; margin-top: 5px;">
+            <table style="width: 100%;">
+                <tr>
+                    <th style="width: 50%;">Post ID</th>
+                    <th style="width: 50%;">User Id</th>
+                </tr>
+                <tr *ngFor="let postRecord of postRecord | async | keyvalue">
+                    <td style="text-align: center;">{{postRecord.key}}</td>
+                    <td style="text-align: center;">{{postRecord.value.userId}}</td>
+                </tr>
+            </table>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  IN tutorial-httpclient.component.html
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <pre>
+                  <code>
+    &lt;div style="height: 100px; overflow: auto; border: solid; padding: 5px">
+        &lt;div &#42;ngFor="let post of postsOfUserId1 | async">
+            &#123; &#123; post | json }}
+        &lt;/div>
+    &lt;/div>
+    &lt;div style="height: 100px; overflow: auto; border: solid; padding: 5px; margin-top: 5px;">
+        &lt;table style="width: 100%;">
+            &lt;tr>
+                &lt;th style="width: 50%;">Post ID&lt;/th>
+                &lt;th style="width: 50%;">User Id&lt;/th>
+            &lt;/tr>
+            &lt;tr &#42;ngFor="let postRecord of postRecord | async | keyvalue">
+                &lt;td style="text-align: center;">&#123; &#123;postRecord.key}}&lt;/td>
+                &lt;td style="text-align: center;">&#123; &#123;postRecord.value.userId}}&lt;/td>
+            &lt;/tr>
+        &lt;/table>
+    &lt;/div>
+                  </code>
+              </pre>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  IN tutorial-httpclient.component.ts
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <pre>
+                  <code>
+    import &#123; HttpClient, HttpParams } from '@angular/common/http';
+    import &#123; Observable, of } from 'rxjs';
+    import &#123; catchError, map } from 'rxjs/operators';
+    import &#123; ShareFacadeService } from '../../service/sharefacade.service';
+    
+    export interface Post &#123;
+        id: number;
+        userId: number;
+        title: string;
+        body: string;
+    }
+    
+    export class TutorialHttpclientComponent implements OnInit&#123;
+        readonly ROOT_URL = 'https://jsonplaceholder.typicode.com';
+        postsOfUserId1: Observable&lt;Post[]>;
+        postRecord: Observable&lt;Record&lt;string, Post>>;
+        constructor(
+            private http: HttpClient,
+            private shareFacadeService: ShareFacadeService
+        ) &#123; }
+    
+        ngOnInit(): void &#123;
+            const params = new HttpParams().set('userId', '1');
+            this.postsOfUserId1 = this.http.get&lt;Post[]>(this.ROOT_URL + '/posts', &#123; params })
+                .pipe(
+                    catchError((error: any) => &#123;
+                        console.log('error: ', error);
+                        return of(null);
+                    }),
+                );
+            this.postRecord = this.http.get&lt;Post[]>(this.ROOT_URL + '/posts')
+                .pipe(map((posts: Post[]) => &#123;
+                    const postRecord = this.shareFacadeService.convertCollectionToObject(posts, 'id');
+                    return postRecord;
+                }),
+                catchError((error: any) => &#123;
+                    console.log('error: ', error);
+                    return of(null);
+                }),
+            );
+        }
+    
+    }                    
+                  </code>
+              </pre>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <p style="font-style: italic"><strong>Side Note</strong>: The <a href="https://angular.io/api/common/KeyValuePipe" target="_blank" rel="noopener noreferrer">keyValuePipe</a>
+            is used to transform object into array of key value pairs.</p>
+    </mat-card>
+
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoutingTutorialComponent } from './routing-tutorial/routing-tutorial.component';
 import { ScssComponent } from './scss/scss.component';
+import { TutorialHttpclientComponent } from './tutorial-httpclient/tutorial-httpclient.component';
 import { TutorialComponent } from './tutorial.component';
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
         path: 'routing',
         component: RoutingTutorialComponent
       },
+      {
+        path: 'httpClient',
+        component: TutorialHttpclientComponent
+      }
     ]
   }
 ];
