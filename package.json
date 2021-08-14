@@ -24,9 +24,12 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
+    "@juggle/resize-observer": "^3.3.1",
+    "echarts": "^5.1.2",
     "http-client": "^4.3.1",
     "lodash-es": "^4.17.21",
     "ng-busy": "^11.0.0",
+    "ngx-echarts": "^7.0.2",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

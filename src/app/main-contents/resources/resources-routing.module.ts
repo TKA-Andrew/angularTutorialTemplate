@@ -4,6 +4,7 @@ import { AngularMaterialResourcesComponent } from './angular-material-resources/
 import { FlexLayoutResourcesComponent } from './flex-layout-resources/flex-layout-resources.component';
 import { LodashEsComponent } from './lodash-es/lodash-es.component';
 import { NgBusyResourcesComponent } from './ng-busy-resources/ng-busy-resources.component';
+import { ResourcesEchartsComponent } from './resources-echarts/resources-echarts.component';
 import { ResourcesComponent } from './resources.component';
 
 const routes: Routes = [{
@@ -21,7 +22,11 @@ const routes: Routes = [{
   }, {
     path: 'ngBusy',
     component: NgBusyResourcesComponent
-  }]
+  }, {
+    path: 'eCharts',
+    component: ResourcesEchartsComponent
+  }
+  ]
 }];
 
 @NgModule({

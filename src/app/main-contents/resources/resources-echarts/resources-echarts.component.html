@@ -1,0 +1,199 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>For data visualization purpose, you may want to display some charts but you don't want to do everything from scratch.</p>
+        <p>So, we can make use of <a href="https://www.npmjs.com/package/ngx-echarts" target="_blank" rel="noopener noreferrer">ngx-echarts</a>.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Installation</h3>
+        <p>npm install echarts -S</p>
+        <p>npm install ngx-echarts -S</p>
+        <p>npm install @juggle/resize-observer -S</p>
+        <p>npm install echarts-gl -S  (if you need <a href="https://www.npmjs.com/package/echarts-gl" target="_blank" rel="noopener noreferrer">Echarts-GL</a> support)</p>
+    </mat-card>
+    <mat-card>
+        <h3>Setup</h3>
+        <h4>Step 1: Import NgxEchartsModule in a module</h4>
+        <p>You can either import it in your app module or any angular module</p>
+        <pre>
+            <code>
+    // IN resources.module.ts
+
+    import &#123; NgxEchartsModule } from 'ngx-echarts';
+
+    @NgModule(&#123;
+        imports: [
+            NgxEchartsModule.forRoot(&#123;
+                echarts: () => import('echarts'),
+            }),
+        ]
+    })
+    export class ResourcesModule &#123; }
+            </code>
+        </pre>
+        <h4>Step 2: Add echarts div in your html</h4>
+        <p>Take note that the echarts directive has pre-defined height of 400px. You can modify it with CSS.</p>
+        <pre>
+            <code>
+    // IN resources-echarts.component.html
+
+    &lt;div echarts [options]="chartOption">&lt;/div>
+            </code>
+        </pre>
+        <h4>Step 3: Define chartOption in component.ts</h4>
+        <p>You can either import it in your app module or any angular module</p>
+    </mat-card>
+
+    <mat-card>
+        <h3>Code Snippet</h3>
+        <div *ngIf="chartOption" echarts [options]="chartOption"></div>
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  IN resources.echarts.component.html
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <pre>
+                  <code>
+    &lt;div *ngIf="chartOption" echarts [options]="chartOption">&lt;/div>
+                  </code>
+              </pre>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  IN resources-echarts.component.ts
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <pre>
+                <code>
+    import &#123; Component, OnInit } from '@angular/core';
+    import map from 'lodash-es/map';
+    
+    @Component(&#123;
+        selector: 'app-resources-echarts',
+        templateUrl: './resources-echarts.component.html',
+        styleUrls: ['./resources-echarts.component.scss']
+    })
+    export class ResourcesEchartsComponent implements OnInit &#123;
+      public chartOption: Record&lt;string, unknown> = null;
+    
+      ngOnInit(): void &#123;
+        const mockDataFromDB = [
+            &#123; month: 'JAN', evaporation: 2.0, precipitation: 2.6, average_temp: 2.0},
+            &#123; month: 'FEB', evaporation: 4.9, precipitation: 5.9, average_temp: 2.2},
+            &#123; month: 'MAR', evaporation: 7.0, precipitation: 9.0, average_temp: 2.3},
+            &#123; month: 'APR', evaporation: 23.2, precipitation: 26.4, average_temp: 4.5},
+            &#123; month: 'MAY', evaporation: 25.6, precipitation: 28.7, average_temp: 6.4},
+            &#123; month: 'JUN', evaporation: 76.7, precipitation: 70.7, average_temp: 10.2},
+            &#123; month: 'JUL', evaporation: 136.6, precipitation: 175.7, average_temp: 20.3},
+            &#123; month: 'AUG', evaporation: 162.2, precipitation: 182.6, average_temp: 23.4},
+            &#123; month: 'SEP', evaporation: 32.6, precipitation: 48.6, average_temp: 23.0},
+            &#123; month: 'OCT', evaporation: 20.0, precipitation: 18.8, average_temp: 16.5},
+            &#123; month: 'NOV', evaporation: 6.4, precipitation: 6.0, average_temp: 12.0},
+            &#123; month: 'DEC', evaporation: 3.3, precipitation: 2.3, average_temp: 6.2}
+        ];
+        let xAxisList: string[] = [];
+        const legendList: string[] = ['Evaporation', 'Precipitation', 'Average Temperature'];
+        const dataRecord = &#123;
+            evaporation: [],
+            precipitation: [],
+            average_temp: []
+        };
+        xAxisList = map(mockDataFromDB, 'month');
+        dataRecord.evaporation = map(mockDataFromDB, 'evaporation');
+        dataRecord.precipitation = map(mockDataFromDB, 'precipitation');
+        dataRecord.average_temp = map(mockDataFromDB, 'average_temp');
+        const dataSeriesList = [
+            &#123;
+                name: 'Evaporation',
+                type: 'bar',
+                data: dataRecord.evaporation
+            },
+            &#123;
+                name: 'Precipitation',
+                type: 'bar',
+                data: dataRecord.precipitation
+            },
+            &#123;
+                name: 'Average Temperature',
+                type: 'line',
+                yAxisIndex: 1,
+                data: dataRecord.average_temp
+            }
+        ];
+    
+        this.chartOption  = &#123;
+            tooltip: &#123;
+                trigger: 'axis',
+                axisPointer: &#123;
+                    type: 'cross',
+                    crossStyle: &#123;
+                        color: '#999'
+                    }
+                }
+            },
+            toolbox: &#123;
+                feature: &#123;
+                    dataView: &#123;show: true, readOnly: false},
+                    magicType: &#123;show: true, type: ['line', 'bar']},
+                    restore: &#123;show: true},
+                    saveAsImage: &#123;show: true}
+                }
+            },
+            legend: &#123;
+                data: legendList
+            },
+            xAxis: [
+                &#123;
+                    type: 'category',
+                    data: xAxisList,
+                    axisPointer: &#123;
+                        type: 'shadow'
+                    }
+                }
+            ],
+            yAxis: [
+                &#123;
+                    type: 'value',
+                    name: 'volumne',
+                    min: 0,
+                    max: 250,
+                    interval: 50,
+                    axisLabel: &#123;
+                        formatter: '&#123;value} ml'
+                    }
+                },
+                &#123;
+                    type: 'value',
+                    name: 'temperature',
+                    min: 0,
+                    max: 25,
+                    interval: 5,
+                    axisLabel: &#123;
+                        formatter: '&#123;value} °C'
+                    }
+                }
+            ],
+            series: dataSeriesList
+          };
+        }
+    
+    }                    
+                </code>
+            </pre>
+            </mat-expansion-panel>
+          </mat-accordion>
+    </mat-card>
+
+    <mat-card>
+        <h3>More Resources</h3>
+        <p><a href="https://www.npmjs.com/package/ngx-echarts#demo" target="_blank" rel="noopener noreferrer">General API Documentation</a></p>
+        <p><a href="https://echarts.apache.org/en/option.html#title" target="_blank" rel="noopener noreferrer">ChartOption Documentation</a></p>
+        <p><a href="https://echarts.apache.org/en/api.html#echarts" target="_blank" rel="noopener noreferrer">Complete API Documentation</a></p>
+        <p><a href="https://echarts.apache.org/en/tutorial.html#Server-side%20Rendering" target="_blank" rel="noopener noreferrer">Official Echarts Tutotrial</a></p>
+        <p><a href="https://echarts.apache.org/examples/en/index.html" target="_blank" rel="noopener noreferrer">Official Echarts Examples</a></p>
+        <p><a href="https://echarts.apache.org/en/cheat-sheet.html" target="_blank" rel="noopener noreferrer">Official Echarts Cheat Sheet</a></p>
+    </mat-card>
+</div>

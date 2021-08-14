@@ -1,10 +1,11 @@
 <mat-drawer-container class="flexContainer" [hasBackdrop]="false">
     <mat-drawer #drawer [mode]="'side'" opened="true">
       <div fxLayout="column">
-        <button mat-button [routerLink]="'lodash-es'">Lodash-es</button>
-        <button mat-button [routerLink]="'flexLayout'">Angular Flex-layout</button>
-        <button mat-button [routerLink]="'angularMaterial'">Angular Material</button>
-        <button mat-button [routerLink]="'ngBusy'">Ng Busy</button>
+        <button mat-button [routerLink]="'lodash-es'" routerLinkActive="lightThemeRouterLinkActive">Lodash-es</button>
+        <button mat-button [routerLink]="'flexLayout'" routerLinkActive="lightThemeRouterLinkActive">Angular Flex-layout</button>
+        <button mat-button [routerLink]="'angularMaterial'" routerLinkActive="lightThemeRouterLinkActive">Angular Material</button>
+        <button mat-button [routerLink]="'ngBusy'" routerLinkActive="lightThemeRouterLinkActive">Ng Busy</button>
+        <button mat-button [routerLink]="'eCharts'" routerLinkActive="lightThemeRouterLinkActive">ECharts</button>
       </div>
     </mat-drawer>
     <mat-drawer-content class="flexContainer">

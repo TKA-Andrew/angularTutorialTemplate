@@ -11,7 +11,10 @@ import { NgBusyResourcesComponent } from './ng-busy-resources/ng-busy-resources.
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutResourcesComponent } from './flex-layout-resources/flex-layout-resources.component';
 import { AngularMaterialResourcesComponent } from './angular-material-resources/angular-material-resources.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { ResourcesEchartsComponent } from './resources-echarts/resources-echarts.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import {MatTableModule} from '@angular/material/table';
     LodashEsComponent,
     NgBusyResourcesComponent,
     FlexLayoutResourcesComponent,
-    AngularMaterialResourcesComponent
+    AngularMaterialResourcesComponent,
+    ResourcesEchartsComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,11 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatButtonModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ]
 })
 export class ResourcesModule { }
