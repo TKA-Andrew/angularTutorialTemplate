@@ -8,7 +8,7 @@
     </mat-card>
 
     <mat-card>
-        <h3>convertCollectionToObject()</h3>
+        <h3>convertCollectionToRecord()</h3>
         <p>Make sure that this is used on collection that has unique id, else some of the data will be lost.</p>
         <p>Use case example:</p>
         <pre>
@@ -34,7 +34,7 @@
         }
     ];
 
-    this.dataRecord = this.shareFacadeService.convertCollectionToObject(dataFromDatabase, 'item_id')
+    this.dataRecord = this.shareFacadeService.convertCollectionToRecord(dataFromDatabase, 'item_id')
 
     // dataRecord output
     &#123;

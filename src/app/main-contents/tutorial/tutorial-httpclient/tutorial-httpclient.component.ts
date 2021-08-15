@@ -41,7 +41,7 @@ export class TutorialHttpclientComponent implements OnInit{
       );
     this.postRecord = this.http.get<Post[]>(this.ROOT_URL + '/posts')
       .pipe(map((posts: Post[]) => {
-          const postRecord = this.shareFacadeService.convertCollectionToObject(posts, 'id');
+          const postRecord = this.shareFacadeService.convertCollectionToRecord(posts, 'id');
           return postRecord;
       }),
       catchError((error: any) => {

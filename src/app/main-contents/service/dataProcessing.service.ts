@@ -9,7 +9,7 @@ export interface KeyOrderConfig {
 @Injectable()
 export class DataProcessingService {
 
-    convertCollectionToObject(array, key): Record<string, unknown> {
+    convertCollectionToRecord(array, key): Record<string, unknown> {
         const initialValue = {};
         return array.reduce((obj, item) => {
             return {

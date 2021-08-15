@@ -171,7 +171,7 @@
                 );
             this.postRecord = this.http.get&lt;Post[]>(this.ROOT_URL + '/posts')
                 .pipe(map((posts: Post[]) => &#123;
-                    const postRecord = this.shareFacadeService.convertCollectionToObject(posts, 'id');
+                    const postRecord = this.shareFacadeService.convertCollectionToRecord(posts, 'id');
                     return postRecord;
                 }),
                 catchError((error: any) => &#123;

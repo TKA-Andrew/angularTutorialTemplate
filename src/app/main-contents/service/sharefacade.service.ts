@@ -84,8 +84,8 @@ export class ShareFacadeService {
     }
 
     // DATA PROCESSING SERVICES ------------------------------------------------------------------------------------------
-    convertCollectionToObject(arrayOfObjects: unknown[], key: string): Record<string, unknown> {
-        return this.dataProcessingService.convertCollectionToObject(arrayOfObjects, key);
+    convertCollectionToRecord(arrayOfObjects: unknown[], key: string): Record<string, unknown> {
+        return this.dataProcessingService.convertCollectionToRecord(arrayOfObjects, key);
     }
 
     arrangeKeys(originalKeys: string[], orderConfig: KeyOrderConfig[]): string[] {

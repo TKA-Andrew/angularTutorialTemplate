@@ -34,7 +34,7 @@ export class DataProcessingComponent implements OnInit {
         item_price: 2
       }
     ];
-    this.dataRecord = this.shareFacadeService.convertCollectionToObject(dataFromDatabase, 'item_id');
+    this.dataRecord = this.shareFacadeService.convertCollectionToRecord(dataFromDatabase, 'item_id');
   }
 
 }
