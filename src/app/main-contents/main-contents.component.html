@@ -3,7 +3,10 @@
         <button mat-icon-button *ngIf="shareFacadeService.menuIconStatusBS | async" (click)="toggleDrawer()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span style="margin-right: 10px;">Angular Tutorial Template</span>
+        <div fxLayout="column" fxLayoutAlign="center center" style="margin-right: 20px;">
+            <p style="text-align: center; font-size: 30px; margin: 0px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" >Angular</p>
+            <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Tutorial Template</span>
+        </div>
         <button mat-button [routerLink]="['original-template']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Original Angular template">Original</button>
         <button mat-button [routerLink]="['tutorial']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Angular Tutorial">Tutorial</button>
         <button mat-button [routerLink]="['documentation']" routerLinkActive="darkThemeRouterLinkActive" matTooltip="Code Documentation">Documentation</button>
