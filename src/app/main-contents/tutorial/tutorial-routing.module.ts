@@ -4,12 +4,17 @@ import { RoutingTutorialComponent } from './routing-tutorial/routing-tutorial.co
 import { ScssComponent } from './scss/scss.component';
 import { TutorialHttpclientComponent } from './tutorial-httpclient/tutorial-httpclient.component';
 import { TutorialComponent } from './tutorial.component';
+import { UdemyNotesComponent } from './udemy-notes/udemy-notes.component';
 
 const routes: Routes = [
   {
     path: '',
     component: TutorialComponent,
     children: [
+      {
+        path: 'udemyNotes',
+        component: UdemyNotesComponent
+      },
       {
         path: 'scss',
         component: ScssComponent

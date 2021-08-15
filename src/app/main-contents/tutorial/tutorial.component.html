@@ -1,8 +1,8 @@
 <mat-drawer-container class="flexContainer" [hasBackdrop]="false">
   <mat-drawer #drawer [mode]="'side'" opened="true">
     <div fxLayout="column">
+      <button mat-button [routerLink]="'udemyNotes'" routerLinkActive="lightThemeRouterLinkActive">Udemy Notes</button>
       <button mat-button [routerLink]="'scss'" routerLinkActive="lightThemeRouterLinkActive">SCSS</button>
-      <button mat-button >Basics</button>
       <button mat-button [routerLink]="'routing'" routerLinkActive="lightThemeRouterLinkActive">Routing</button>
       <button mat-button [routerLink]="'httpClient'" routerLinkActive="lightThemeRouterLinkActive">Http Client</button>
       <button mat-button >RxJS Observable</button>

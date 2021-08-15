@@ -15,6 +15,7 @@ import { ScssComponent } from './scss/scss.component';
 import { TutorialHttpclientComponent } from './tutorial-httpclient/tutorial-httpclient.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { UdemyNotesComponent } from './udemy-notes/udemy-notes.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     RoutingTutorialComponent,
     ScssComponent,
     TutorialHttpclientComponent,
+    UdemyNotesComponent,
   ],
   imports: [
     CommonModule,

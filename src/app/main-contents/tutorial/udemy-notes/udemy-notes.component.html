@@ -1,0 +1,147 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <mat-card>
+        <h2>Introduction</h2>
+        <p>The following are the notes taken when I learn Angular from this <a href="https://www.udemy.com/course/the-complete-guide-to-angular-2/" target="_blank" rel="noopener noreferrer">Udemy course</a>.</p>
+        <p>You are recommended to go through the Udemy Course as it covers the fundamental of Angular with great examples.</p>
+        <p>The notes for recording what kinds of things can be done instead of teaching how to use them.</p>
+        <p>These are the temporary notes before I spend time making code snippets for each of them, like what I did for routing part.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Reusability/Modular techniques</h3>
+        <ul>
+            <li>Make html as dumb as possible</li>
+            <li>Use local references # to pass data in the same html</li>
+            <li>Use @Input() and @Output() to pass data between ts and html</li>
+            <li>Use @ViewChild() to pass data between ts and html, it is easier and faster than using @input and @output</li>
+            <li>Use &lt;ng-content> to make a reusable frame (that can put different content inside)</li>
+            <li>Use service to pass data across components or modules.</li>
+        </ul>       
+    </mat-card>
+    <mat-card>
+        <h3>Angular Component Lifecycle</h3>
+        <ul>
+            <li>The most common lifecycle we used is ngOnInit, but there are many <a href="https://angular.io/guide/lifecycle-hooks#lifecycle-event-sequence" target="_blank" rel="noopener noreferrer">lifecycle hooks</a>.</li>
+            <li>Note that ViewChild element should be used after view initialization</li>
+            <li>There is another child called ContentChild, which can be used to monitor the content, for example, the text within the &lt;p>&lt;/p> tag.</li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Directive</h3>
+        <ul>
+            <li>Directives with * are structural directives.</li>
+            <li>We cannot have more than one structural directive in one element. For example, we cannot put *ngIf and *ngFor in a same div</li>
+            <li>For any DOM manipulation, you will need to use <a href="https://angular.io/api/core/Renderer2">Renderer2</a></li>
+            <li>We can use <a href="https://angular.io/api/core/HostListener" target="_blank" rel="noopener noreferrer">HostListener</a> to listen to events supported by a DOM, such as mouseenter, mouseleave, etc.</li>
+            <li>On the other hand, <a href="https://angular.io/api/core/HostBinding" target="_blank" rel="noopener noreferrer">HostBinding</a> can be used to bind to a property of the host element.</li>
+            <li>We can use ngSwitch, ngSwitchCase and ngSwitchDefault to do switching</li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Service and Dependency Injection</h3>
+        <ul>
+            <li>The Angular Dependency Injector actually is a hierarchical injector. If a service instance is injected to a component, the service instance will be available to all the child components of the component.
+                Also, note that the dependency is top down, if a service instance is injected to a component, the service instance will not be available to its parent component. 
+            </li>
+            <li>
+                For example, let's say you have the following hierarchy:<br>
+                App Component
+                <ul>
+                    <li>account component</li>
+                    <li>newAccount component</li>
+                </ul>
+                If you add loggingService into the providers of all three components, the child components will override the service instance, and end up they are referring to different service instances
+                <br>On the other hand, if you only declare the service in AppComponent, then all the child components can use the same service instance with their parents.
+            </li>
+            <li>If we inject a service into an AppModule (not AppComponent), the whole components inside the app module can use the service instance, unless being overridden.</li>
+            <li>Injecting a service into another service is only possible if we provide the service at app module level. It is not possible if we inject the service on component level.</li>
+            <li>Normally we add the service into the providers:[] array of app.module.ts, but other than this method you may straight away write @Injectable(&#123;providedIn: ‘root’}) in that array.
+            </li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Routing</h3>
+        <p>Please refer to <a routerLink='./../routing'>this</a>.</p>
+    </mat-card>
+    <mat-card>
+        <h3>Observables</h3>
+        <ul>
+            <li>An observable can be thought of as a data source.</li>
+            <li>The other side of observables is an observer (can be thought of as your code), which is the subscribe function. This observer can handle data, handle error and handle completion.</li>
+            <li>Observables can be considered as alternatives to callbacks or promises.</li>
+            <li>Observables don’t necessarily stop emitting values just because you are not interested in them anymore. And, it is possible that another observable is created if you route back to the same page again.
+                Therefore, you should unsubscribe from the observables that you are not interested in anymore.</li>
+            <li>When you subscribe, you need to store that subscription in your property. Then, unsubscribe() when ngOnDestroy</li>
+            <li>Observables can handle data, error and completion. Take note that when there is error, the whole observable will destroy and stop the subscription but completion will complete and stop the subscription.</li>
+            <li>Every observable has a pipe method, the pipe method is built into RxJS.</li>
+            <li>Another approach of passing data other than passing data through a service emitter is by using a subject. A subject is also an object that you can subscribe to, but it is more active because you can actively call next() on it from the outside.</li>
+            <li>Although both event emitter and Subject will give the same output, using a subject is the recommended way. Also, use Subject instead of Observables.</li>
+            <li>Take note that Subject doesn't store your value, if you need to cache the value, use Behaviour Subject instead.</li>
+            <li>Similar to Observables, you should unsubscribe to your subjects through whatever you don’t need them. Similarly, you store the subscription using Subscription for RxJS, add ngOnDestroy and unsubscribe() the usage.</li>
+            <li>Very rarely will you build your own observables.</li>
+            <li>Use subjects to replace event emitters only if you need to pass data across multiple components. If the passing of data is simple and just between parent component and child component, use @Input() and @Output().</li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Forms - Reactive</h3>
+        <ul>
+            <li>You can easily create a form, and easily get the values inserted into the forms.</li>
+            <li>Similar to googleForms settings, you can set a few validators such as required, email format and forbidden usernames.</li>
+            <li>You can also do Asynchronous validators to wait for the checking to resolve. By using this, you will have Pending and Valid/Invalid status.</li>
+            <li>You can subscribe to the statusChanges and valueChanges as well to monitor the form.</li>
+            <li>You can also use setValue() to programmatically fill up the form.</li>
+            <li>Other than that, you can use patchValue() to update the form.</li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Pipes</h3>
+        <ul>
+            <li>Pipes are the built-in Angular feature that allows you to transform your output.
+                It is extremely useful when you only want to transform the output somewhere, instead of throughout the code.
+                For example, let’s say you want to output a variable in all uppercase, you might not want to change the value to uppercase straight away but only during display.</li>
+            <li>These are the <a href="https://angular.io/api?query=pipe" target="_blank" rel="noopener noreferrer">built-in pipes</a>.</li>
+            <li>You can chain multiple pipes, but need to take note of the order, the pipes will be executed from left to right.</li>
+            <li>You can also create your own pipes using the Pipe and PipeTransform API and Pipe Decorator. But this is not common use case.</li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Http Request</h3>
+        <ul>
+            <li>You don’t connect your Angular to the database straight away, else you will need to enter your database credentials into your Angular.
+                If you do so, it would be highly insecure because everyone can read your angular code since it is a front-end javascript which everyone can inspect.</li>
+            <li>A backend server normally uses API, and it is just like a normal website, except that you get data from this website instead of html.
+                Other than sending and fetching data, servers can also be used to upload files, or send some analytics to the backend.</li>
+            <li>Anatomy of a HTTP request:
+                <ul>
+                    <li>URL: also called API endpoint</li>
+                    <li>Http verb: for examples, GET, PUT, POST</li>
+                    <li>Headers: additional metadata of a http request</li>
+                    <li>Body: the core data attached to your POST, PUT and PATCH requests</li>
+                </ul>
+            </li>
+            <li>To send Http Request and receive the Http response, you need to use the built in <a routerLink='./../httpClient'>HttpClientModule</a>.</li>
+            <li>You can set your own custom headers, you can also set params using HttpParams.</li>
+            <li>You can also define the response type.
+                NOTE THAT this is important if your http response is not json such as “successfully added item”,
+                because the default response type is json. If your response is only text, then you need to add responseType:'text', else you will get an error message.</li>
+            <li>You can use interceptors to add headers to all http requests.</li>
+            <li>You can also use interceptors to modify your responses.</li>
+            <li>You can also use multi interceptors but the order does matter.</li>
+        </ul>
+    </mat-card>
+    <mat-card>
+        <h3>Angular Modules</h3>
+        <ul>
+            <li>Angular Module is a way to bundle Angular building blocks together, such as components, directives, services and pipes.
+                These need to be grouped into a module so that Angular is aware of these features, because Angular doesn’t automatically scan all the files in your project.</li>
+            <li>Every Angular app needs to have at least one module, which is the app module.</li>
+            <li>In @NgModule Decorator, you can define the following:
+                <ul>
+                    <li>Declarations => an array of components, directives, services, custom pipes etc used in your application</li>
+                    <li>Imports => an array of other modules used in your application</li>
+                    <li>Providers => an array of services that are used in your application</li>
+                    <li>Bootstrap => an array which is important for starting your app, and it defines which component is available right away in the index.html</li>
+                </ul>
+            </li>
+        </ul>
+    </mat-card>
+</div>
